@@ -85,20 +85,20 @@ translate_byte:
     ;   AL = (AH + 17) % 95 + 32
 
     ; Get first character in range 32–126
-    movzx eax, byte [esi]     ; Zero-extend input byte
+    movzx eax, byte [esi]     ; Zero extend input byte
     mov ebx, 95
     xor edx, edx
-    div ebx                   ; EAX / 95 → remainder in EDX
-    add dl, 32                ; Ensure printable range
+    div ebx                   ; EAX / 95  (remainder in EDX)
+    add dl, 32            ; Ensure a printable range
     mov ch, dl                ; Save first char in CH temporarily
 
     ; Get second character (AH + 17) % 95 + 32
-    movzx eax, ch             ; Zero-extend from CH into EAX
-    add eax, 17               ; adds 17 to the character because thats what was in the example
+    movzx eax, ch             ; Zero extend from CH into EAX
+    add eax, 17               ; Adds 17 to the character because thats what was in the example
     xor edx, edx
     div ebx
     add dl, 32
     mov al, dl
-    mov ah, ch              ;moves the data into the right places so we can access it later
+    mov ah, ch              ; moves the data into the right places so we can access it later
 
     ret
